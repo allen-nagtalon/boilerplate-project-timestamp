@@ -27,6 +27,14 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' })
 })
 
+app.get('/api', (req, res) => {
+  const date = new Date()
+  res.json({
+    unix: Math.floor(date.getTime() / 1000),
+    utc: date.toGMTString()
+  })
+})
+
 app.get('/api/:date?', (req, res, next) => {
   if (req.params.date === '1451001600000') {
     res.json({
@@ -40,11 +48,7 @@ app.get('/api/:date?', (req, res, next) => {
       utc: date.toGMTString()
     })
   } else {
-    res.json({
-      error: 'Invalid Date',
-      unix: Math.floor(new Date().getTime() / 1000),
-      utc: new Date().toGMTString()
-    })
+    res.json({ error: 'Invalid Date' })
   }
   next()
 })
