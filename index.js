@@ -30,7 +30,7 @@ app.get('/api/hello', function (req, res) {
 app.get('/api', (req, res) => {
   const date = new Date()
   res.json({
-    unix: Math.floor(date.getTime() / 1000),
+    unix: Math.floor(date.getTime()),
     utc: date.toGMTString()
   })
 })
@@ -44,7 +44,7 @@ app.get('/api/:date?', (req, res, next) => {
   } else if (Date.parse(req.params.date)) {
     const date = new Date(req.params.date)
     res.json({
-      unix: Math.floor(date.getTime() / 1000),
+      unix: Math.floor(date.getTime()),
       utc: date.toGMTString()
     })
   } else {
